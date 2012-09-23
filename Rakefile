@@ -14,11 +14,11 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "app_box"
-  gem.homepage = "http://github.com/sandboxws/app_box"
+  gem.name = "omniauth-goodreads"
+  gem.homepage = "http://github.com/sandboxws/omniauth-goodreads"
   gem.license = "MIT"
-  gem.summary = %Q{Simple and easy configuration for your Rails application}
-  gem.description = %Q{app_box provides a simple and yet very powerful structure to configure glonal settings for any Rails application.}
+  gem.summary = %Q{OmniAuth strategy for Goodreads}
+  gem.description = %Q{OmniAuth strategy for Goodreads}
   gem.email = "aelhussaini@gmail.com"
   gem.authors = ["Ahmed El.Hussaini"]
   # dependencies defined in Gemfile
@@ -47,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "app_box #{version}"
+  rdoc.title = "omniauth-goodreads #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
