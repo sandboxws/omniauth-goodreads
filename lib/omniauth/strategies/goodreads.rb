@@ -1,10 +1,14 @@
-require 'omniauth-oauth2'
+require 'multi_xml'
+require 'omniauth-oauth'
+require 'oauth'
 
 module OmniAuth
   module Strategies
-    class Goodreads < OmniAuth::Strategies::OAuth2
+    class Goodreads < OmniAuth::Strategies::OAuth
       option :client_options, {
-        :site => 'http://www.goodreads.com'
+        :site => 'http://www.goodreads.com',
+        :authorize_url => 'http://www.goodreads.com/oauth/authorize',
+        :token_url => 'http://www.goodreads.com/oauth/access_token'
       }
 
       def request_phase
@@ -15,13 +19,12 @@ module OmniAuth
 
       info do
         {
-          'id' => id,
-          'name' => user['name'],
-          'user_name' => user['user_name'],
-          'image_url' => user['image_url'],
-          'about' => user['about'],
-          'location' => user['location'],
-          'website' => user['website'],
+          'name' => raw_info['name'],
+          'user_name' => raw_info['user_name'],
+          'image' => raw_info['image_url'],
+          'about' => raw_info['about'],
+          'location' => raw_info['location'],
+          'website' => raw_info['website'],
         }
       end
 
@@ -30,11 +33,16 @@ module OmniAuth
       end
 
       def raw_info
-        access_token.options[:mode] = :query
-        @raw_info ||= access_token.get('/auth_user').parsed
+        if @raw_info.nil?
+          MultiXml.parser = :rexml
+          authenticated_user = MultiXml.parse(access_token.get('/api/auth_user').body)
+          id = authenticated_user['GoodreadsResponse']['user']['id'].to_i
+          response_doc = MultiXml.parse(access_token.get("/user/show/#{id}.xml?key=#{@consumer_key}").body)
+          @raw_info = response_doc['GoodreadsResponse']['user']
+        end
+
+        @raw_info
       end
     end
   end
 end
-
-OmniAuth.config.add_camelization 'goodreads', 'Goodreads'
