@@ -1,3 +1,3 @@
-# OmniAuth Behance
+# OmniAuth Goodreads
 
-This gem contains the Behance strategy for OmniAuth.
+This gem contains the Goodreads strategy for OmniAuth.
