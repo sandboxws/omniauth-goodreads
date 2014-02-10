@@ -21,7 +21,8 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{OmniAuth strategy for Goodreads}
   gem.email = "aelhussaini@gmail.com"
   gem.authors = ["Ahmed El.Hussaini"]
-  # dependencies defined in Gemfile
+  gem.add_dependency 'omniauth-oauth', '~> 1.0.1'
+  gem.add_dependency 'multi_xml', '~> 0.5.5'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
