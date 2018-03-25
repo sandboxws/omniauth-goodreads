@@ -20,6 +20,7 @@ module OmniAuth
       info do
         {
           'name' => raw_info['name'],
+          'nickname' => raw_info['link'].match(Regexp.new nickname_regex)[1],
           'user_name' => raw_info['user_name'],
           'image' => raw_info['image_url'],
           'about' => raw_info['about'],
@@ -30,6 +31,10 @@ module OmniAuth
 
       extra do
         {:raw_info => raw_info}
+      end
+
+      def nickname_regex
+        'https?:\/\/(?:www\.)?goodreads\.com\/user\/show\/(.+)'
       end
 
       def raw_info
