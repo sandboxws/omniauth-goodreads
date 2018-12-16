@@ -6,9 +6,9 @@ module OmniAuth
   module Strategies
     class Goodreads < OmniAuth::Strategies::OAuth
       option :client_options, {
-        :site => 'http://www.goodreads.com',
-        :authorize_url => 'http://www.goodreads.com/oauth/authorize',
-        :token_url => 'http://www.goodreads.com/oauth/access_token'
+        :site => 'https://www.goodreads.com',
+        :authorize_url => 'https://www.goodreads.com/oauth/authorize',
+        :token_url => 'https://www.goodreads.com/oauth/access_token'
       }
 
       def request_phase
